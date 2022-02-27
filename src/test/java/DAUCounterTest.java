@@ -8,11 +8,12 @@ import java.util.HashSet;
 
 public class DAUCounterTest {
 
-    @Test
-    public void testApp(){
-        assert true;
-    }
-
+    /**
+     * This function is testing the hashmap size after the call of the parseFile function
+     * @param fileName - file to parse
+     * @param parsingMap1 - teh map to fill
+     * @param size - expected size
+     */
     private void testParseFileSize(String fileName, HashMap<String, HashSet<String>> parsingMap1, int size){
 
         DAUCounter.parseFile(fileName, parsingMap1);
@@ -20,6 +21,11 @@ public class DAUCounterTest {
 
     }
 
+    /**
+     * This function checks the sets size that we filled by calling the parseFile function
+     * @param myMap - map after the parseFile called
+     * @param sizes - map with the expected sizes based on the date
+     */
     private void testParseFileSets(HashMap<String, HashSet<String>> myMap, HashMap<String, Integer> sizes){
         for (String str : myMap.keySet()){
             assert sizes.get(str).equals(myMap.get(str).size());
@@ -27,6 +33,9 @@ public class DAUCounterTest {
     }
 
 
+    /**
+     * Tests for the parseFile function with different files
+     */
     @Test
     public void ManyTestParseFile(){
 
@@ -73,6 +82,9 @@ public class DAUCounterTest {
 
     }
 
+    /**
+     * Test teh mai function with different cases of arguments
+     */
     @Test
     public void testMain(){
 
