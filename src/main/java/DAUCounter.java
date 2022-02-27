@@ -10,7 +10,7 @@ public class DAUCounter
      * The key is the date, and the value is a hashset with the users of that day.
      * Like that we pass only once through the lines of the file.
      */
-    private static void parseFile(String fileName, HashMap<String, HashSet<String>> myMap){
+    public static void parseFile(String fileName, HashMap<String, HashSet<String>> myMap){
         try{
 
             FileReader fileReader = new FileReader(fileName);
@@ -19,6 +19,11 @@ public class DAUCounter
             String[] values;
 
             while(line != null){  // Line by line
+
+                if (line.isEmpty()){
+                    line = reader.readLine();
+                    continue;
+                }
 
                 values = line.split(",");  // Separate the line to find the userId and the date he logged in
                 String userId = values[0];
@@ -49,9 +54,9 @@ public class DAUCounter
      * This function prints the number of DAU day by day, according to the hashmap we filled
      * while parsing the file.
      */
-    private static void printDAUByDay(HashMap<String, HashSet<String>> myMap){
+    public static void printDAUByDay(HashMap<String, HashSet<String>> myMap){
         for (String str : myMap.keySet()){
-            System.out.println("the DAU for " + str + " is " + myMap.get(str).size());
+            System.out.print("the DAU for " + str + " is " + myMap.get(str).size() + "\n");
         }
     }
 
@@ -59,7 +64,7 @@ public class DAUCounter
      * This function manages the other functions and runs the program from start to end.
      * @param fileName - the file to parse in order to find the DAU users od a day.
      */
-    private static void runAll(String fileName){
+    public static void runAll(String fileName){
         HashMap<String, HashSet<String>> myMap = new HashMap<>();
         parseFile(fileName, myMap);
         printDAUByDay(myMap);
@@ -68,7 +73,7 @@ public class DAUCounter
     public static void main(String[] args) {
 
         if (args.length != 1){
-            System.err.println("You need to enter only a file path as an argument !");
+            System.err.print("You need to enter only a file path as an argument !");
             return;
         }
         runAll(args[0]); // First arg is supposed to be the fileName
